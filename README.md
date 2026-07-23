@@ -25,6 +25,10 @@ do, *how* it will be built, and *what order* to build it in — before any code 
 Each step's output becomes input to the next — the code at the end is downstream of a
 paper trail you can read top to bottom.
 
+For a detailed, file-by-file walkthrough of exactly how each command produced each
+artifact in this repo — including the markdown conventions spec-kit uses throughout —
+see [`PROCESS.md`](./PROCESS.md).
+
 ## The two implementations
 
 ### [`vibe-coded/`](./vibe-coded/) — the "before"
