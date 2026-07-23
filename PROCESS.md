@@ -7,6 +7,11 @@ of *how* each artifact in [`specs/001-task-list-api/`](./specs/001-task-list-api
 which command produced it, what template it started from, and the markdown conventions
 spec-kit uses throughout so you can write consistent files of your own.
 
+For a deeper reference on spec-kit's own mechanics beyond this project's specific
+walkthrough — every `specify init` flag, every installed command (including the ones this
+demo didn't need), and how the two-layer template system is generated and customized —
+see [`docs/`](./docs/).
+
 ## 1. Installing spec-kit
 
 Everything starts with one CLI command, run once against this repo:

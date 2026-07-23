@@ -27,7 +27,10 @@ paper trail you can read top to bottom.
 
 For a detailed, file-by-file walkthrough of exactly how each command produced each
 artifact in this repo — including the markdown conventions spec-kit uses throughout —
-see [`PROCESS.md`](./PROCESS.md).
+see [`PROCESS.md`](./PROCESS.md). For a deeper reference on spec-kit's own mechanics —
+`specify init`'s flags, the full command roster (including ones this demo didn't use),
+and how the template system itself is generated and customized — see
+[`docs/`](./docs/).
 
 ## The two implementations
 
