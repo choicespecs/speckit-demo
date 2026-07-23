@@ -44,9 +44,10 @@ to change command *behavior* (not just content), spec-kit's supported mechanism 
 **extension hook system**: every installed command checks for a `.specify/extensions.yml`
 file (this repo doesn't have one) with entries like `hooks.before_specify` or
 `hooks.after_plan`. A hook points at another command to run automatically before/after the
-main one — e.g. an extension could auto-create a git branch before every
-`/speckit-specify` call, without editing `speckit-specify/SKILL.md` itself. You can see
-every command checking for this in its "Pre-Execution Checks" / "Post-Execution Checks"
+main one — e.g. the official `git` extension auto-creates a feature branch before every
+`/speckit-specify` call, without editing `speckit-specify/SKILL.md` itself. See
+[`extensions.md`](./extensions.md) for exactly what installing an extension changes on
+disk. You can see every command checking for this in its "Pre-Execution Checks" / "Post-Execution Checks"
 sections.
 
 ## Layer B: Artifact templates — the document skeletons

@@ -16,8 +16,11 @@ Three documents in this repo explain spec-kit at three different altitudes:
 | [`cli-init.md`](./cli-init.md) | `specify init` — flags, integrations, what it scaffolds, and how it tracks what it installed |
 | [`commands.md`](./commands.md) | Every `/speckit-*` command, not just the five this demo ran |
 | [`markdown-templates.md`](./markdown-templates.md) | The two distinct template layers, how each is customized, and how content actually gets generated |
+| [`extensions.md`](./extensions.md) | The hook/extension system: the catalog, real official and community extensions, and exactly what installing one changes on disk |
 
-Every claim in these three docs is grounded in files actually present in this repo —
+Every claim in these docs is grounded in files actually present in this repo —
 `.specify/`, `.claude/skills/`, and `specs/001-task-list-api/` — not spec-kit's external
 documentation. Where something is a general capability we didn't exercise here (like
-`/speckit-clarify` or `specify preset`), that's called out explicitly.
+`/speckit-clarify`, `specify preset`, or any extension), that's called out explicitly —
+`extensions.md` in particular was verified in a disposable scratch repo, since this repo
+itself has none installed.
