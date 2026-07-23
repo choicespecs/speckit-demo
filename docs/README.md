@@ -18,10 +18,12 @@ This repo explains spec-kit at three different altitudes:
 | [`markdown-templates.md`](./markdown-templates.md) | The two distinct template layers, how each is customized, and how content actually gets generated |
 | [`extensions.md`](./extensions.md) | The hook/extension system: the catalog, real official and community extensions, and exactly what installing one changes on disk |
 | [`lifecycle.md`](./lifecycle.md) | What runs once vs. what repeats: the ongoing day-to-day workflow, not just what each command does in isolation |
+| [`worked-example.md`](./worked-example.md) | A full second feature run through every command, including the three optional ones this repo's real feature never needed — real prompts, real answers, real generated content |
 
 Every claim in these docs is grounded in files actually present in this repo —
 `.specify/`, `.claude/skills/`, and `specs/001-task-list-api/` — not spec-kit's external
 documentation. Where something is a general capability we didn't exercise here (like
 `/speckit-clarify`, `specify preset`, or any extension), that's called out explicitly —
-`extensions.md` in particular was verified in a disposable scratch repo, since this repo
-itself has none installed.
+`extensions.md` and `worked-example.md` in particular were verified in a disposable
+scratch copy of this repo, since `speckit-demo` itself only ever ran the five core
+commands once, on one feature.
