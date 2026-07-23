@@ -47,6 +47,39 @@ changes. Compare `.specify/templates/plan-template.md`'s headings to our
 [`plan.md`](./specs/001-task-list-api/plan.md): `## Technical Context`,
 `## Constitution Check`, `## Project Structure` appear in both, in the same order.
 
+**Fixed slots vs. free-form slots.** Not every placeholder in a template means the same
+thing. The constitution template has two different kinds:
+
+- **Numbered principle slots** (`[PRINCIPLE_1_NAME]` … `[PRINCIPLE_5_NAME]`) are for
+  *behavioral rules* — timeless "MUST" statements meant to shape every decision
+  downstream. You can have fewer or more than five; the number is a default, not a limit.
+- **Free-form section slots** (`[SECTION_2_NAME]`, `[SECTION_3_NAME]`) are for governance
+  that doesn't fit the "MUST" shape but still needs to be nailed down once and referenced
+  everywhere — usually either domain constraints or structural facts. The template's own
+  comments list examples: *Additional Constraints, Security Requirements, Performance
+  Standards* for one, *Development Workflow, Review Process, Quality Gates* for the
+  other. You name the section whatever fits your project — the bracket token is a slot,
+  not a fixed label.
+
+In [`constitution.md`](./.specify/memory/constitution.md) we named these two slots
+**Demo Scope Constraints** (a fact about scope — "exactly these four operations" — not a
+rule about *how* to build) and **Repository Layout** (structural — where `vibe-coded/`,
+`spec-driven/`, and `README.md` live, not a MUST-statement). Other projects might instead
+name theirs *Technology Stack Mandates*, *Security & Compliance Requirements*,
+*Performance Standards*, or *Deployment Policies* — whatever non-principle governance that
+project actually needs. Nothing caps you at exactly two, either — add a
+`## Section 4: Whatever` if a project needs a third dimension.
+
+These sections aren't decorative: every downstream command reads the *whole*
+`constitution.md`, not just the numbered principles. Our **Demo Scope Constraints**
+section is the reason `/speckit-specify` never let scope drift past four operations and
+needed zero `[NEEDS CLARIFICATION]` markers — and our **Repository Layout** section is
+why `plan.md`'s Project Structure put `spec-driven/` exactly where the constitution had
+already declared it should go, rather than re-deciding it. By convention, `/speckit-plan`'s
+Constitution Check gate only walks the *numbered* principles explicitly — but nothing
+stops a project from also treating a custom section like "Security Requirements" as a
+hard gate if that's what the team wants enforced.
+
 **HTML comments for machine-readable metadata that isn't prose.** Our constitution opens
 with a `<!-- Sync Impact Report -->` comment recording the version bump and rationale —
 visible in source, invisible when rendered, so it doesn't clutter the read experience:
