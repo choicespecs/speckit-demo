@@ -33,6 +33,38 @@ semantic version bump (MAJOR for removing/redefining a principle, MINOR for addi
 PATCH for wording) — it's designed to feel like amending a real governing document, which
 should be infrequent and deliberate, not a routine step in building feature #47.
 
+**"Rare" doesn't mean "frozen," though — here's how an amendment actually happens.** You
+don't hand-edit `constitution.md` directly; you re-invoke `/speckit-constitution`,
+describing the change, and the same skill that wrote v1.0.0 handles the amendment:
+
+1. It loads the existing constitution and works out what's changing vs. what stays.
+2. It **decides the version bump itself**, by rule — MAJOR if a principle is being
+   removed or redefined, MINOR if one is being added, PATCH for wording-only changes.
+   You don't pick the number; the nature of the change determines it.
+3. `Last Amended` updates to today; `Ratified` (the original adoption date) never changes.
+4. It re-reads `plan-template.md`, `spec-template.md`, `tasks-template.md`, and every
+   installed command file for now-stale references to what just changed.
+5. It prepends a **new** Sync Impact Report recording old version → new version and
+   exactly what changed — the same HTML-comment block currently showing `[none] → 1.0.0`
+   at the top of ours would show `1.0.0 → 1.1.0` (or `2.0.0`) after an amendment.
+
+**A concrete example for this repo**: imagine a second feature needed to persist tasks to
+disk. That directly violates "Illustrative, Not Production" (no persistence layer) and
+"Minimal Dependencies" (`express` only). `/speckit-plan`'s Constitution Check gate would
+fail it outright — you couldn't `/speckit-specify` your way around a gate. The correct
+order is: run `/speckit-constitution` first, explicitly redefine or scope the relevant
+principle (a MAJOR bump, since you're redefining one), *then* `/speckit-specify` the new
+feature against the updated rules. The gate failing isn't a bug to route around — it's the
+constitution doing exactly its job: forcing a scope-widening decision to be explicit and
+version-tracked instead of silently drifting in through one feature's plan.
+
+**What doesn't happen automatically**: an amendment doesn't retroactively touch
+`specs/001-task-list-api/` — that feature stays a historical record of what the rules were
+under v1.0.0, the version in effect when it was built. Nothing re-validates old features
+against a new constitution version on its own; that's what `/speckit-analyze` (a
+read-only consistency check) or `/speckit-converge` (which appends remediation tasks) are
+for if you want to check a specific feature for drift after a constitution change.
+
 ## Tier 3 — The repeatable engine: once per feature
 
 This is the part that actually loops, for as long as the project exists:
