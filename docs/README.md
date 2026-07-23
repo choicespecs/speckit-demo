@@ -19,6 +19,7 @@ This repo explains spec-kit at three different altitudes:
 | [`extensions.md`](./extensions.md) | The hook/extension system: the catalog, real official and community extensions, and exactly what installing one changes on disk |
 | [`lifecycle.md`](./lifecycle.md) | What runs once vs. what repeats: the ongoing day-to-day workflow, not just what each command does in isolation |
 | [`worked-example.md`](./worked-example.md) | A full second feature run through every command, including the three optional ones this repo's real feature never needed — real prompts, real answers, real generated content |
+| [`constitution-guide.md`](./constitution-guide.md) | `/speckit-constitution` specifically: how to invoke it, what its arguments look like, sample commands for every scenario, and an argument reference across all ten commands |
 
 Every claim in these docs is grounded in files actually present in this repo —
 `.specify/`, `.claude/skills/`, and `specs/001-task-list-api/` — not spec-kit's external
