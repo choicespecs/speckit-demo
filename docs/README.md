@@ -1,6 +1,6 @@
 # Spec-Kit Reference Docs
 
-Three documents in this repo explain spec-kit at three different altitudes:
+This repo explains spec-kit at three different altitudes:
 
 1. **[`../README.md`](../README.md)** — the pitch. Why spec-driven development matters,
    using this repo's vibe-coded vs. spec-driven contrast as evidence.
@@ -17,6 +17,7 @@ Three documents in this repo explain spec-kit at three different altitudes:
 | [`commands.md`](./commands.md) | Every `/speckit-*` command, not just the five this demo ran |
 | [`markdown-templates.md`](./markdown-templates.md) | The two distinct template layers, how each is customized, and how content actually gets generated |
 | [`extensions.md`](./extensions.md) | The hook/extension system: the catalog, real official and community extensions, and exactly what installing one changes on disk |
+| [`lifecycle.md`](./lifecycle.md) | What runs once vs. what repeats: the ongoing day-to-day workflow, not just what each command does in isolation |
 
 Every claim in these docs is grounded in files actually present in this repo —
 `.specify/`, `.claude/skills/`, and `specs/001-task-list-api/` — not spec-kit's external
