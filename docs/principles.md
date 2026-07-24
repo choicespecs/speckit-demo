@@ -131,6 +131,76 @@ Before adding a sentence to `constitution.md` (by hand or via
 5. **Does `(NON-NEGOTIABLE)` actually mean no exceptions, ever?** Only reach for it if the
    answer is genuinely yes — this repo uses it once, on purpose.
 
+## A sample library: principles beyond this demo
+
+This repo's five principles are all shaped by one narrow goal (teach spec-kit clearly).
+That makes them a clean *example* of the anatomy above, but a thin sample of the range of
+things a principle can govern. Here's a wider set, drawn from project types this repo isn't
+— each phrased the same way (name, MUST, rationale) and paired with the kind of event that
+actually justifies writing it down, since "what triggered it" is often clearer than the
+principle text alone at teaching *when* a principle is warranted.
+
+| Domain | Principle (name — MUST) | What actually triggers writing this down |
+|---|---|---|
+| Public REST API | **Backward-Compatible Contracts** — a published response shape MUST NOT remove or retype a field within a major API version; new fields MUST be additive only. | A client integration broke in production because a field was silently renamed — not hypothetical, it already happened once. |
+| CLI tool | **Scriptable Output** — every command MUST support a `--json` flag emitting machine-parseable output on stdout; human-formatted output only when stdout is a TTY. | Someone's shell pipeline (`tool | jq ...`) broke because a "cosmetic" formatting change reordered columns. |
+| Data pipeline | **Idempotent Reruns** — every stage MUST be safe to re-run against the same input batch without duplicating downstream records. | A retry after a partial failure produced duplicate rows, and nobody had decided in advance whose job it was to prevent that. |
+| Security-sensitive service | **No Secrets in Logs** — no log statement, at any level including debug, MUST include a raw credential, token, or PII value. | A debug-level log line leaked an API key into a shared log aggregator that more people can read than the code review had in mind. |
+| Mobile app | **Offline-First Core Actions** — every action in the primary user flow MUST complete (queued if needed) without a live network connection. | Support tickets clustered around "the app is useless on the subway," and the team needed a rule that outlives the specific screen that prompted it. |
+| Internal demo/teaching repo (this one) | **Illustrative, Not Production** — see Principle II above. | Written *before* any feature existed, precisely to prevent scope from drifting toward "production-grade" one convenience at a time. |
+
+Notice the common thread in the trigger column: every one of these came from something that
+**already happened** (an incident, a broken integration, a support pattern) or from a
+decision made deliberately up front (this repo's own constitution) — never from someone
+guessing at a hypothetical. That's the pattern worth copying more than any individual row.
+
+## When to add a principle, vs. rerun the constitution for something else, vs. neither
+
+Three different things get conflated under "should I touch the constitution": adding a
+*new* principle, amending an *existing* one, and handling something that was never
+constitution material to begin with. `lifecycle.md`'s Tier 2 covers the mechanics of
+re-invoking `/speckit-constitution`; this is the judgment call of *whether to*.
+
+**Signs it's time to add a new principle:**
+
+- **The same kind of violation could recur on a feature you haven't built yet.** A one-off
+  mistake gets fixed in the code. A *pattern* — the kind of mistake that's structurally
+  likely to happen again on the next feature too — is what a principle is for.
+- **It's the sort of rule that's easy to skip under deadline pressure.** If a rule would
+  get followed anyway with no one holding the line, writing it down adds ceremony without
+  adding safety. Principles earn their keep on the rules people are tempted to shortcut.
+- **You want the Constitution Check gate to actually refuse a plan over it.** If violating
+  the rule should block `/speckit-plan` outright (per `lifecycle.md`'s persistence-layer
+  example), it belongs in governance. If it's closer to a style preference a linter could
+  catch, it probably doesn't need a MUST in `constitution.md` at all.
+
+**Signs you should rerun `/speckit-constitution` to *amend* rather than add:**
+
+- **The same principle has failed the Constitution Check gate on two or more separate
+  plans**, each papered over with its own `Complexity Tracking` justification
+  (`plan-template.md:106-113`). Two justified exceptions to the same rule isn't a pattern
+  of exceptions — it's a sign the principle itself is drawn in the wrong place, and it's
+  cheaper to redefine it once (a MAJOR bump) than to keep re-justifying the same deviation
+  feature after feature.
+- **`/speckit-analyze` reports a CRITICAL constitution violation**, and on inspection the
+  correct fix is genuinely "the rule is wrong for where the project is now," not "the code
+  is wrong." That's a deliberate amendment, not a bug fix.
+
+**Signs it's neither — leave the constitution alone:**
+
+- **The rule only matters for the feature in front of you.** That's scope, and it belongs
+  in that feature's own `spec.md` (Functional Requirements) or `plan.md`
+  (`Complexity Tracking` if it's a one-off exception), not in the project-wide constitution
+  — see the scope-vs-principle table earlier in this doc.
+- **It's a single justified exception, not a second occurrence.** The first time a plan
+  needs to deviate from a principle for a specific, well-argued reason, `Complexity
+  Tracking` is the correct outlet, exactly as designed. Amending the constitution over a
+  single exception defeats the point of having a MUST in the first place — it should still
+  mean something the next time a plan doesn't have a good excuse.
+- **A reviewer's real objection is about wording, not substance.** That's a PATCH-level
+  clarification at most (`constitution-guide.md`'s wording-only row) — worth doing, but not
+  the same judgment call as adding or redefining a rule.
+
 Everything else — how to phrase the actual `/speckit-constitution` invocation, what the
 version bump will be, what happens to non-governance text you accidentally include — is
 covered in [`constitution-guide.md`](./constitution-guide.md).
